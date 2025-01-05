@@ -348,13 +348,13 @@ function collision() {
   playerBox.updateWorldMatrix(true, true);
   const playerBoundingBox = new Box3().setFromObject(playerBox);
   helper = new Box3Helper(playerBoundingBox, 0xff0000);
-  scene.add(helper);
+  // scene.add(helper);
 
   // 障害物との衝突
   enemy_list = enemy_list.filter((enemy) => {
     const enemyBoundingBox = new Box3().setFromObject(enemy);
     helper = new Box3Helper(enemyBoundingBox, 0xff0000);
-    scene.add(helper);
+    // scene.add(helper);
     const isCollided = playerBoundingBox.intersectsBox(enemyBoundingBox)
   if (isCollided) {
     window.location.href = "./index.html";
