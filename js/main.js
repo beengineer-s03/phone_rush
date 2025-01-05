@@ -332,9 +332,9 @@ function jump() {
 
 // 衝突判定
 function collision() {
-  box_X = 0;
-  box_Y = 0;
-  box_Z = 0; // サイズが合うように変えてみましょう。
+  box_X = 5;
+  box_Y = 5;
+  box_Z = 5; // サイズが合うように変えてみましょう。
   geometry = new BoxGeometry(box_X, box_Y, box_Z);
   sphereMaterial = new MeshPhongMaterial({ color: 0xff0000 });
   playerBox = new Mesh(geometry, sphereMaterial);
@@ -349,10 +349,31 @@ function collision() {
   scene.add(helper);
 
   // 障害物との衝突
-  // ここに追加
+  enemy_list = enemy_list.filter((enemy) => {
+    const enemyBoundingBox = new Box3().setFromObject(enemy);
+    helper = new Box3Helper(enemyBoundingBox, 0xff0000);
+    scene.add(helper);
+    const isCollided = playerBoundingBox.intersectsBox(enemyBoundingBox)
+  if (isCollided) {
+    window.location.href = "./index.html";
+    return false; // この敵を削除
+  }
+  return true; // この敵を保持
+  // ここまで
+});
 
   // スマホとの衝突
-  // ここに追加
+  phone_list = phone_list.filter((phone) => {
+    const phoneBoundingBox = new Box3().setFromObject(phone);
+    helper = new Box3Helper(phoneBoundingBox, 0xff0000);
+    scene.add(helper);
+    const isCollided = playerBoundingBox.intersectsBox(phoneBoundingBox)
+  if (isCollided) {
+    scene.remove(phone);
+    return false; // このスマホを削除
+  }
+  return true;
+  });
 
   // ゴールとの衝突
   if (goal) {
@@ -368,7 +389,6 @@ function animate() {
   const animationId = requestAnimationFrame(animate);
 
   // Mixer
-  // ここに追加
   if (mixer) {
     mixer.update(0.01); // 時間の経過量
   }
