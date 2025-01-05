@@ -380,6 +380,7 @@ function collision() {
   // ゴールとの衝突
   if (goal) {
     goalBoundingBox = new Box3().setFromObject(goal);
+    const isCollided = playerBoundingBox.intersectsBox(goalBoundingBox)
     if (playerBoundingBox.intersectsBox(goalBoundingBox)) {
       console.log("ゴール");
       window.location.href = "./index.html";
