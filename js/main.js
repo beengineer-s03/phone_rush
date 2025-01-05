@@ -399,7 +399,7 @@ function animate() {
     // ジャンプ関数の実行
     jump();
     // 衝突判定関数の実行
-    // ここに追加
+    collision();
     // カメラの移動
     camera.position.set(0, 8, player.position.z + 10);
     camera.lookAt(new Vector3(0, 5, player.position.z));
