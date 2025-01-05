@@ -116,7 +116,6 @@ glbloader.load(
     player.rotation.set(0, Math.PI, 0);
     player.position.set(0, 0, 0);
 
-
 mixer = new AnimationMixer(player); // 解説 1
     const runningAction = gltf.animations.find(
       (animation) => animation.name === "running"
@@ -135,8 +134,6 @@ mixer = new AnimationMixer(player); // 解説 1
     console.error(error);
   }
 );
-
-
 
 // 建物の描画
 glbloader.load(
@@ -176,7 +173,6 @@ glbloader.load(
     console.error(error);
   }
 );
-// ここに記述
 
 // 障害物の描画
 for (let g = 1; g < 12; g++) {
@@ -250,19 +246,32 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("devicemotion", (dat) => {
     if (ios) {
       // iOS の時
-      // ここに追加
+      aX = dat.accelerationIncludingGravity.x || 0;
+      aY = dat.accelerationIncludingGravity.y || 0;
+      aZ = dat.accelerationIncludingGravity.z || 0;
     } else {
       // android の時
-      // ここに追加
+      aX = -1 * dat.accelerationIncludingGravity.x || 0;
+      aY = -1 * dat.accelerationIncludingGravity.y || 0;
+      aZ = -1 * dat.accelerationIncludingGravity.z || 0;
     }
   });
 
   // ジャイロセンサの値の取得
-  // ここに追加
+  window.addEventListener(
+    "deviceorientation",
+    (event) => {
+      alpha = event.alpha || 0;
+      beta = event.beta || 0;
+      gamma = event.gamma || 0;
+      console.log("Gyro:", alpha, beta, gamma);
+    },
+    false
+  );
 
   // 一定時間ごとに
   let graphtimer = window.setInterval(() => {
-    // ここに追加
+    displayData();
   }, 33);
 
   // 描画する関数
@@ -293,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // プレイヤーの移動
 function move() {
   // ここに追加
-  player.position.z -= 0.01;
+  player.position.z -= 0.2;
 
 }
 
