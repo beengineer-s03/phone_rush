@@ -368,7 +368,7 @@ function collision() {
   phone_list = phone_list.filter((phone) => {
     const phoneBoundingBox = new Box3().setFromObject(phone);
     helper = new Box3Helper(phoneBoundingBox, 0xff0000);
-    scene.add(helper);
+    // scene.add(helper);
     const isCollided = playerBoundingBox.intersectsBox(phoneBoundingBox)
   if (isCollided) {
     scene.remove(phone);
