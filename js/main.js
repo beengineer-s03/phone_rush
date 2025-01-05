@@ -371,7 +371,7 @@ function collision() {
     scene.add(helper);
     const isCollided = playerBoundingBox.intersectsBox(phoneBoundingBox)
   if (isCollided) {
-    scene.remove(phone);
+    scene.remove('オブジェクト');
     return false; // このスマホを削除
   }
   return true;
